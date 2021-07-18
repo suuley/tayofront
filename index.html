@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="icon" href="assets/img/bitmap.png" type="image/png" sizes="16x16"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="styles/style.css" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+
+
+</head>
+<body class="qalad">
+
+ <div id="app">
+  <div class="card">
+    <form v-on:submit.prevent="getResults"class="example" action="" style="margin:auto;max-width:300px">
+      <input type="text" name="search" v-model.lazy="keyword" placeholder="Search..">
+      <button name="btn" type="submit"><i class="fa fa-search"></i></button> 
+    </form>
+    <img :src="'http://localhost:3000/uploads/'+ article.image" alt=""> 
+  
+    <h4>idNumber {{article.idNumber}}</h4>
+    <p>Magac {{article.magac}}</p>
+    <p>Dhashay {{article.dhashay}}</p>
+    <p>Deggan {{article.deggan}}</p>
+    <p :class="{sax: article.canshuur === 0, qalad: article.canshuur > 0}">Canshuur {{article.canshuur}}</p>  
+    <div class="buttongroup">
+      <section v-if="errored">
+        <p class="err">Sorry, Dokumentiga aad radineyso ma heyno</p>
+      </section>
+  </div> 
+</div>
+</div> 
+</body>
+
+
+ 
+
+<Script>
+ if ('serviceWorker' in navigator) {
+  // Register a service worker hosted at the root of the
+  // site using the default scope.
+  navigator.serviceWorker.register('sw.js').then(function(registration) {
+    console.log('Service worker registration succeeded:', registration);
+  }, /*catch*/ function(error) {
+    console.log('Service worker registration failed:', error);
+  });
+} else {
+  console.log('Service workers are not supported.');
+}
+</Script>
+<script src="Scripts/Framework/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" charset="UTF-8"src="Scripts/script.js"></script>
+
+
+</html>
