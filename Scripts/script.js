@@ -23,9 +23,7 @@ methods: {
       this.loading = true
       return  axios.get("https://suuley.mooo.com/listo/"+`${this.keyword}`).then(response => 
       {this.article = response.data}).catch(error => {
-        console.log(error)
         this.errored = true
-        console.log(article.canshuur)
       })
     
 

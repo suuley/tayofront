@@ -1,60 +1,75 @@
-const PRECACHE = 'GOVOL-v1';
-const RUNTIME = 'runtime';
-
-// A list of local resources we always want to be cached.
-const PRECACHE_URLS = [
-  'index.html',
-  './', // Alias for index.html
-  'styles/style.css',
-  'Scripts/script.js',
-  'Scripts/Framework/vue.js',
+var CACHE_NAME = 'my-site-cache-v1';
+var urlsToCache = [
+  '/',
+  '/styles/style.css',
+  '/Scripts/script.js',
+  'assets/img/bitmap.png',
   'assets/img/icon-192x192.png',
   'assets/img/icon-256x256.png',
   'assets/img/icon-384x384.png',
   'assets/img/icon-512x512.png'
+
 ];
 
-// The install handler takes care of precaching the resources we always need.
-self.addEventListener('install', event => {
+self.addEventListener('install', function(event) {
+  // Perform install steps
   event.waitUntil(
-    caches.open(PRECACHE)
-      .then(cache => cache.addAll(PRECACHE_URLS))
-      .then(self.skipWaiting())
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
+      })
   );
 });
 
-// The activate handler takes care of cleaning up old caches.
-self.addEventListener('activate', event => {
-  const currentCaches = [PRECACHE, RUNTIME];
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
-    }).then(cachesToDelete => {
-      return Promise.all(cachesToDelete.map(cacheToDelete => {
-        return caches.delete(cacheToDelete);
-      }));
-    }).then(() => self.clients.claim())
-  );
-});
-    
-self.addEventListener('fetch', event => {
-  // Skip cross-origin requests, like those for Google Analytics.
-  if (event.request.url.startsWith(self.location.origin)) {
-    event.respondWith(
-      caches.match(event.request).then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse;
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // Cache hit - return response
+        if (response) {
+          return response;
         }
 
-        return caches.open(RUNTIME).then(cache => {
-          return fetch(event.request).then(response => {
-            // Put a copy of the response in the runtime cache.
-            return cache.put(event.request, response.clone()).then(() => {
+        return fetch(event.request).then(
+          function(response) {
+            // Check if we received a valid response
+            if(!response || response.status !== 200 || response.type !== 'basic') {
               return response;
-            });
-          });
-        });
+            }
+
+            // IMPORTANT: Clone the response. A response is a stream
+            // and because we want the browser to consume the response
+            // as well as the cache consuming the response, we need
+            // to clone it so we have two streams.
+            var responseToCache = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then(function(cache) {
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          }
+        );
       })
     );
-  }
 });
+
+self.addEventListener('activate', function(event) {
+
+  var cacheAllowlist = ['pages-cache-v1', 'blog-posts-cache-v1'];
+
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheAllowlist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+

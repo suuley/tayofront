@@ -9,6 +9,11 @@
     "description": "AppKena",
     "icons": [
         {
+            "src": "assets/img/maskable_icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
             "src": "assets/img/icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
