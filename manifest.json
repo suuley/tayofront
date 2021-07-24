@@ -9,9 +9,10 @@
     "description": "AppKena",
     "icons": [
         {
-            "src": "assets/img/maskable_icon-192x192.png",
+            "src": "assets/img/maskable_icon_192x192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"    
         },
         {
             "src": "assets/img/icon-192x192.png",

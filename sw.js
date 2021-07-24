@@ -1,4 +1,4 @@
-var CACHE_NAME = 'my-site-cache-v1';
+var CACHE_NAME = 'http://localhost:8000';
 var urlsToCache = [
   '/',
   '/styles/style.css',
