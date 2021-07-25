@@ -1,75 +1,44 @@
-var CACHE_NAME = 'http://localhost:8000';
-var urlsToCache = [
-  '/',
-  '/styles/style.css',
-  '/Scripts/script.js',
-  'assets/img/bitmap.png',
-  'assets/img/icon-192x192.png',
-  'assets/img/icon-256x256.png',
-  'assets/img/icon-384x384.png',
-  'assets/img/icon-512x512.png'
-
-];
+const cacheName = 'mysite'
 
 self.addEventListener('install', function(event) {
-  // Perform install steps
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-  );
-});
-
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-
-        return fetch(event.request).then(
-          function(response) {
-            // Check if we received a valid response
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // IMPORTANT: Clone the response. A response is a stream
-            // and because we want the browser to consume the response
-            // as well as the cache consuming the response, we need
-            // to clone it so we have two streams.
-            var responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        );
-      })
-    );
-});
-
-self.addEventListener('activate', function(event) {
-
-  var cacheAllowlist = ['pages-cache-v1', 'blog-posts-cache-v1'];
-
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheAllowlist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
+    caches.open(cacheName).then(function(cache) {
+      return cache.addAll(
+        [
+          '/',
+          '/index.html',
+          '/styles/style.css',
+          '/Scripts/script.js',
+          '/assets/img/bitmap.png',
+          '/assets/img/icon-192x192.png',
+          '/assets/img/maskable_icon_192x192.png',
+          '/assets/img/icon-256x256.png',
+          '/assets/img/icon-384x384.png',
+          '/assets/img/icon-512x512.png'
+        ]
       );
     })
   );
 });
+
+self.addEventListener('activate', event => {
+  
+ 
+})
+
+
+
+addEventListener('fetch', event => {
+  // Prevent the default, and handle the request ourselves.
+  event.respondWith(async function() {
+    // Try to get the response from a cache.
+    const cachedResponse = await caches.match(event.request);
+    // Return it if we found one.
+    if (cachedResponse) return cachedResponse;
+    // If we didn't find a match in the cache, use the network.
+    return fetch(event.request);
+  }());
+});
+
+
 
