@@ -3,7 +3,7 @@
     "background_color": "#f69435",
     "display": "standalone",
     "scope": ".",
-    "start_url": "https://suuley.github.io/tayofront",
+    "start_url": "/tayofront/",
     "name": "Mudug",
     "short_name": "Mudug",
     "description": "AppKena",
