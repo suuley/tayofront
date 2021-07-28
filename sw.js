@@ -5,16 +5,16 @@ self.addEventListener('install', function(event) {
     caches.open(cacheName).then(function(cache) {
       return cache.addAll(
         [
-          '/tayofront/',
-          '/tayofront/index.html',
-          '/tayofront/styles/style.css',
-          '/tayofront/Scripts/script.js',
-          '/tayofront/assets/img/bitmap.png',
-          '/tayofront/assets/img/icon-192x192.png',
-          '/tayofront/assets/img/maskable_icon_192x192.png',
-          '/tayofront/assets/img/icon-256x256.png',
-          '/tayofront/assets/img/icon-384x384.png',
-          '/tayofront/assets/img/icon-512x512.png'
+          '/',
+          '/index.html',
+          '/styles/style.css',
+          '/Scripts/script.js',
+          '/assets/img/bitmap.png',
+          '/assets/img/icon-192x192.png',
+          '/assets/img/maskable_icon_192x192.png',
+          '/assets/img/icon-256x256.png',
+          '/assets/img/icon-384x384.png',
+          '/assets/img/icon-512x512.png'
         ]
       );
     })
