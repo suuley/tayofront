@@ -1,0 +1,38 @@
+{
+    "theme_color": "#50e3c2",
+    "background_color": "#f69435",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "name": "Mudug",
+    "short_name": "Mudug",
+    "description": "AppKena",
+    "icons": [
+        {
+            "src": "assets/img/maskable_icon_192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"    
+        },
+        {
+            "src": "assets/img/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/img/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/img/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/img/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

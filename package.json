@@ -1,0 +1,22 @@
+{
+  "name": "mudug",
+  "version": "1.0.0",
+  "description": "AppKena",
+  "main": "index.html",
+  "scripts": {
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suuley/aqoonsi.git"
+  },
+  "author": "suuley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suuley/aqoonsi/issues"
+  },
+  "homepage": "https://suuley.github.io/aqoonsi",
+  "dependencies": {
+    "gh-pages": "^3.2.2"
+  }
+}

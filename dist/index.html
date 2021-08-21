@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="icon" href="assets/img/bitmap.png" type="image/png" sizes="16x16"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes, minimal-ui">
+  <meta name="theme-color" content="#50e3c2"/>
+  <link rel="apple-touch-icon" href="assets/img/icon-192x192.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="styles/style.css" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</head>
+<body class="qalad">
+
+ <div id="app">
+  <div class="card">
+    <form v-on:submit.prevent="getResults"class="example" action="" style="margin:auto;max-width:300px">
+      <input type="text" name="search" v-model.lazy="keyword" aria-label="Enter search term">
+      <button name="btn" name="searchbtn" type="submit"><i class="fa fa-search"></i></button> 
+    </form>
+    <img :src="'https://suuley.mooo.com/uploads/'+ article.image" alt=""> 
+  
+    <h4>idNumber {{article.idNumber}}</h4>
+    <p>Magac {{article.magac}}</p>
+    <p>Dhashay {{article.dhashay}}</p>
+    <p>Deggan {{article.deggan}}</p>
+    <p :class="{sax: article.canshuur === 0, qalad: article.canshuur > 0}">Canshuur {{article.canshuur}}</p>  
+    <div class="buttongroup">
+      <section v-if="errored">
+        <p class="err">Sorry, Dokumentiga aad radineyso ma heyno</p>
+      </section>
+  </div> 
+</div>
+</div> 
+</body>
+
+
+ 
+
+<Script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+</Script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" charset="UTF-8"src="Scripts/script.js"></script>
+
+
+</html>

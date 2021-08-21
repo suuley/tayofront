@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "io.github.suuley.twa",
+               "sha256_cert_fingerprints": ["C2:3C:0C:F3:5A:74:25:79:4A:4A:25:F6:28:4B:3B:5E:CA:8E:3A:9B:5C:AB:B6:52:4A:07:1A:DB:2A:E7:93:B2"] }
+}]
